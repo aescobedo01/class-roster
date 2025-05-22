@@ -1,18 +1,25 @@
-#include <iostream>
-#include <string>
-#include "degree.h"
 #include "student.h"
-#include "roster.h"
-#ifndef STUDENT_H
-#define STUDENT_H
 
 using namespace std;
 
-Student::Student() {}
 //default student constructor
+Student::Student() {
+//initialize member variables
+    this->studentId = "";
+    this->firstName = "";
+    this->lastName = "";
+    this->emailAddress = "";
+    this->yearsOld = 0;
+    for (int i = 0; i < 3; ++i){
+        this->daysCourse[i] = -1;
+    }
+    //default degree
+    this->degreeProgram = SOFTWARE;
+}
 
-//student constructor
+//student constructor with parameters
     Student::Student(string studentid, string firstname, string lastname, string email, int age, int days[], Degree degree) {
+        //assign parameter values to member variables
         this->studentId = studentid;
         this->firstName = firstname;
         this->lastName = lastname;
@@ -28,30 +35,32 @@ Student::Student() {}
     Student::~Student() {};
 
     //mutators or setters
-    void Student::setId(const string& studentId){
+    void Student::setId(string studentId){
         this->studentId = studentId;
     }
-    void Student::setFName(const string& firstName){
+    void Student::setFName(string firstName){
         this->firstName = firstName;
     }
 
-    void Student::setLName(const string& lastName){
+    void Student::setLName(string lastName){
         this->lastName = lastName;
     }
-    void Student::setEmail(const string& emailAddress){
+    void Student::setEmail(string emailAddress){
         this->emailAddress = emailAddress;
     }
-    void Student::setAge(const int& yearsOld){
+    void Student::setAge(int yearsOld){
         this->yearsOld = yearsOld;
     }
 
-    void Student::setDays(int days[]){
+    void Student::setDays(int daysCourse1, int daysCourse2, int daysCourse3) {
         for (int i = 0; i < 3; i++){
-            this->daysCourse[i] = days[i];
+            this->daysCourse[0] = daysCourse1;
+            this->daysCourse[1] = daysCourse2;
+            this->daysCourse[2] = daysCourse3;
         }
     }
 
-    virtual Student::setDegree(const Degree degreeProgram) {
+    void Student::setDegree(Degree degreeProgram) {
         this->degreeProgram = degreeProgram;
     }
 
@@ -76,43 +85,39 @@ Student::Student() {}
         return yearsOld;
     }
 
-    int* Student::getDays() const {
-        return daysCourse;
+    int Student::getDays(int i) const {
+        return daysCourse[i];
     }
 
-    virtual Degree Student::getDegree() const {
+    Degree Student::getDegree() const {
         return degreeProgram;
     }
 
 //print everything
 void Student::print() const {
     string myDegree;
-    if (degreeProgram == Security) {
+    if (this->degreeProgram == SECURITY) {
         myDegree = "Security";
-        break;
     }
-      else if (degreeProgram == Software) {
+      else if (this->degreeProgram == SOFTWARE) {
         myDegree = "Software";
-        break;
     }
-      else if (degreeProgram == Network) {
+      else if (this->degreeProgram == NETWORK) {
         myDegree = "Network";
-        break;
     }
     else {
         myDegree = "Error";
     }
 
+//PRINT EVERYTHING
     cout << "ID: " << getId()
     << "\tFirst Name: " << getFName()
     << "\tLast Name: " << getLName()
     << "\tE-mail: " << getEmail()
     << "\tAge: " << getAge()
     << "\tDays in Course: {" << daysCourse[0] << ", " << daysCourse[1] << ", " << daysCourse[2] << "}"
-    << "\tDegree: " << getDegree()
+    << "\tDegree: " << myDegree
     << endl;
 
     return;
 }
-
-#endif
