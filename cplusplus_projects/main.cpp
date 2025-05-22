@@ -2,7 +2,6 @@
 #include <string>
 #include <array>
 #include "roster.h"
-#include "degree.h"
 #include "student.h"
 
 using namespace std;
@@ -16,6 +15,7 @@ cout << "C++" << endl;
 cout << "012203109" << endl;
 cout << "Ana Escobedo" << endl;
 
+//array for each student
 const std::string studentData[] = {
 "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY", 
 "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK", 
@@ -24,31 +24,42 @@ const std::string studentData[] = {
 "A5,Ana,Escobedo,myemailaddress@gmail.com,23,20,21,22,SOFTWARE"
 };
 
-Roster* classRoster = new Roster(5);
+//classRoster is an instance of the roster class
+//using pointer to access members of a class
+Roster* classRoster = new Roster();
 
+//for loop to parse through studentdata
 for (int i = 0; i < 5; i++) {
     classRoster->parse(studentData[i]);
 }
 
+//print everything
 classRoster->printAll();
+
+//print all invalid email addresses
 classRoster->printInvalidEmails();
 
-//loop through classRosterArray and for each element:
+//loop through classRosterArray to find avg days in each course
 for (int i = 0; i < 5; i++){
 classRoster->printAverageDaysInCourse(classRoster->GetId(i));
 }
-classRoster->printByDegreeProgram(Security);
-classRoster->printByDegreeProgram(Network);
-classRoster->printByDegreeProgram(Software);
+//seperate each student by degree type
+classRoster->printByDegreeProgram(SECURITY);
+classRoster->printByDegreeProgram(NETWORK);
+classRoster->printByDegreeProgram(SOFTWARE);
+
+//REMOVE STUDENT A3
 classRoster->remove("A3");
+
+//now print every student except a3
 classRoster->printAll();
 
-cout << "Student with this ID was not found: " << endl;
+//parse again, student not found
 classRoster->remove("A3");
-//expected: above line should print a message saying student not found.
 
 delete classRoster;
 
 system("pause>0");
+
 return 0;
 }
