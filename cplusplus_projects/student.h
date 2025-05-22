@@ -1,20 +1,20 @@
+#pragma once
+
 #include <iostream>
-#include <string>
 #include "degree.h"
-#include "roster.h"
-#ifndef STUDENT_H
-#define STUDENT_H
 
 using namespace std;
-//student class in h file
+//student class
 class Student{
     
-protected:
+private:
+//declare private varibales
     string studentId;
     string lastName;
     string firstName;
     string emailAddress;
     int yearsOld;
+    //3 days for the days in course
     int daysCourse[3];
     Degree degreeProgram;
 
@@ -29,26 +29,24 @@ public:
     ~Student();
 
 //declare setters
-void setId(string& studentID);
-void setFName(string& firstName);
-void setLName(string& lastName);
-void setEmail(string& emailAddress);
-void setAge(int& yearsOld);
-void setDays(int days[]);
+void setId(string studentID);
+void setFName(string firstName);
+void setLName(string lastName);
+void setEmail(string emailAddress);
+void setAge(int yearsOld);
+void setDays(int daysCourse1, int daysCourse2, int daysCourse3);
 void setDegree(Degree degreeProgram);
 
-//dec getters
+//declare getters and data types to get info
 string getId() const;
 string getFName() const;
 string getLName() const;
 string getEmail() const;
 int getAge() const;
-int* getDays() const;
-virtual Degree getDegree() const;
+int getDays(int i) const;
+Degree getDegree() const;
 
 //print
-virtual void print() const;
+void print() const;
     
 };
-
-#endif 
