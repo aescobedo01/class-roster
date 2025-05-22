@@ -1,18 +1,9 @@
-#include <iostream>
-#ifndef DEGREE_H
-#define DEGREE_H
+#pragma once
 
-using namespace std;
-
-enum Degree {
-Security,
-Network,
-Software
-};
-
-Degree getDegree()
+// enumerated data types
+enum Degree
 {
-    return Degree();
-}
-
-#endif
+    SECURITY,
+    NETWORK,
+    SOFTWARE
+};
